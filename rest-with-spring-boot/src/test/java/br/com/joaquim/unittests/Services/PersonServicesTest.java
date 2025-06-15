@@ -1,10 +1,11 @@
-package br.com.joaquim.Services;
+package br.com.joaquim.integrationtests.Services;
 
+import br.com.joaquim.Services.PersonServices;
 import br.com.joaquim.data.dto.v1.PersonDTO;
 import br.com.joaquim.exception.RequiredObjectIsNullException;
 import br.com.joaquim.model.Person;
 import br.com.joaquim.repository.PersonRepository;
-import br.com.joaquim.unitetests.mapper.mocks.MockPerson;
+import br.com.joaquim.integrationtests.mocks.MockPerson;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

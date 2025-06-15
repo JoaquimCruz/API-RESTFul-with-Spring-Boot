@@ -1,4 +1,4 @@
-package br.com.joaquim.unitetests.mapper.mocks;
+package br.com.joaquim.integrationtests.mocks;
 
 import java.util.ArrayList;
 import java.util.List;
