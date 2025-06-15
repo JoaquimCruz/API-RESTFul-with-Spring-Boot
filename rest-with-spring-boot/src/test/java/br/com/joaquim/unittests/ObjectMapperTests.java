@@ -1,4 +1,4 @@
-package br.com.joaquim.mapper;
+package br.com.joaquim.unittests;
 import static br.com.joaquim.mapper.ObjectMapper.mapList;
 import static br.com.joaquim.mapper.ObjectMapper.map;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.util.List;
 
 import br.com.joaquim.data.dto.v1.PersonDTO;
-import br.com.joaquim.integrationtests.mocks.MockPerson;
+import br.com.joaquim.unittests.mapper.mocks.MockPerson;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

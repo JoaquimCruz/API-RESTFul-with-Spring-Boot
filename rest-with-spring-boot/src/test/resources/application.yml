@@ -1,1 +1,26 @@
-spring.application.name=rest-with-spring-boot
+server:
+  port: 8888
+cors:
+  originsPatterns: http://localhost:8888,http://localhost:3000
+spring:
+  application:
+    name: crud1
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+    open-in-view: false
+
+  logging:
+    level:
+      br.com.joaquim.crud1: INFO
+
+  spring-doc:
+    paths-to-match: /api/**/v1/**
+    swagger-ui:
+      use-root-path: true
