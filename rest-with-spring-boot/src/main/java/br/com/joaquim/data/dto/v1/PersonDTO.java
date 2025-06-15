@@ -3,13 +3,18 @@ package br.com.joaquim.data.dto.v1;
 
 
 
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.hateoas.RepresentationModel;
 
 import java.io.Serializable;
 
 import java.util.Objects;
 
-
+@Getter
+@Setter
+@EqualsAndHashCode(callSuper = false)
 //@JsonPropertyOrder({"id", "name", "surname", "address", "gender"})
 public class PersonDTO extends RepresentationModel<PersonDTO> implements Serializable {
 
@@ -27,57 +32,10 @@ public class PersonDTO extends RepresentationModel<PersonDTO> implements Seriali
     //@JsonIgnore
     private String gender;
 
-    public PersonDTO() {}
+    private Boolean enabled;
 
-    public Long getId() {
-        return id;
+    public PersonDTO() {
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (!(o instanceof PersonDTO person)) return false;
-        return Objects.equals(getId(), person.getId()) && Objects.equals(getName(), person.getName()) && Objects.equals(getSurname(), person.getSurname()) && Objects.equals(getAddress(), person.getAddress());
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(getId(), getName(), getSurname(), getAddress());
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
 
 }

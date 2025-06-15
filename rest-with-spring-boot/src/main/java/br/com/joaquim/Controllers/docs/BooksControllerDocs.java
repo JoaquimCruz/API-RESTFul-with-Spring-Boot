@@ -17,7 +17,7 @@ import java.util.List;
 // Colocar essas informações no controller ia deixar o código muito poluído.
 public interface BooksControllerDocs {
 
-    @Operation(summary = "finds a book", description = "find a specific book by their id", tags = {"Books"},
+    @Operation(summary = "finds a book", description = "find a specific book by their id", tags = {"books"},
             responses = {
                     @ApiResponse(description = "Success",
                             responseCode = "200",

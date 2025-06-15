@@ -9,6 +9,7 @@ import br.com.joaquim.mapper.ObjectMapper;
 import br.com.joaquim.mapper.custom.PersonMapper;
 import br.com.joaquim.model.Person;
 import br.com.joaquim.repository.PersonRepository;
+import jakarta.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -108,12 +109,28 @@ public class PersonServices {
         logger.info("Delete person");
     }
 
+    // Ação não é gerenciado pelo Spring, por isso o @Transactional
+    @Transactional
+    public PersonDTO disablePerson(Long id){
+        repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("No records found for this ID"));
+        repository.disablePerson(id);
+
+        logger.info("Disabling one person");
+
+        var entity = repository.findById(id).get();
+        var dto = ObjectMapper.map(entity, PersonDTO.class);
+        AddHateoasLinks(dto);
+        return dto;
+
+    }
+
 
     private static void AddHateoasLinks(PersonDTO dto) {
         dto.add(linkTo(methodOn(PeopleController.class).FindById(dto.getId())).withSelfRel().withType("GET"));
         dto.add(linkTo(methodOn(PeopleController.class).FindAll()).withRel("FindAll").withType("GET"));
         dto.add(linkTo(methodOn(PeopleController.class).create(dto)).withRel("Create").withType("POST"));
         dto.add(linkTo(methodOn(PeopleController.class).update(dto)).withRel("Update").withType("PUT"));
+        dto.add(linkTo(methodOn(PeopleController.class).disablePerson(dto.getId())).withRel("Disable").withType("PATCH"));
         dto.add(linkTo(methodOn(PeopleController.class).Delete(dto.getId())).withRel("Delete").withType("DELETE"));
     }
 

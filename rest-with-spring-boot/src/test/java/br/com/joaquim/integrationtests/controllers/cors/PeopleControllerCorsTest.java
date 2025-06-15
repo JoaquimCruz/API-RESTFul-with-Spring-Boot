@@ -1,4 +1,4 @@
-package br.com.joaquim.integrationtests.controllers.withjson;
+package br.com.joaquim.integrationtests.controllers.cors;
 
 import br.com.joaquim.config.TestConfigs;
 import br.com.joaquim.integrationtests.dto.PersonDTO;
@@ -21,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-class PeopleControllerTest extends AbstractIntegrationTest {
+class PeopleControllerCorsTest extends AbstractIntegrationTest {
 
     private static RequestSpecification specification;
     private static ObjectMapper objectMapper;
@@ -143,6 +143,7 @@ class PeopleControllerTest extends AbstractIntegrationTest {
         assertEquals("Stallman", createdPerson.getSurname());
         assertEquals("New York City - New York - USA", createdPerson.getAddress());
         assertEquals("Male", createdPerson.getGender());
+        assertTrue(createdPerson.getEnabled());
     }
     @Test
     @Order(4)
@@ -174,5 +175,6 @@ class PeopleControllerTest extends AbstractIntegrationTest {
         person.setSurname("Stallman");
         person.setAddress("New York City - New York - USA");
         person.setGender("Male");
+        person.setEnabled(true);
     }
 }
