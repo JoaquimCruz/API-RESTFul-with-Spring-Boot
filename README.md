@@ -2,7 +2,7 @@
 <img align= "center" alt="html5" src="https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white" /> <img align= "center" alt="html5" src="https://img.shields.io/badge/spring-%236DB33F.svg?style=for-the-badge&logo=spring&logoColor=white" />
 
 
-# API RESTful com Spring Boot
+
 
 Este é um projeto básico de uma **API RESTful** desenvolvida com **Spring Boot**, que implementa operações de **CRUD (Create, Read, Update, Delete)**. A aplicação foi construída com foco em **boas práticas de desenvolvimento**, **separação de responsabilidades** e **escalabilidade**.
 
