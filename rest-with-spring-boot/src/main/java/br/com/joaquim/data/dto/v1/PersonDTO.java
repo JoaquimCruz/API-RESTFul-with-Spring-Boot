@@ -7,6 +7,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.hateoas.RepresentationModel;
+import org.springframework.hateoas.server.core.Relation;
 
 import java.io.Serializable;
 
@@ -16,6 +17,9 @@ import java.util.Objects;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 //@JsonPropertyOrder({"id", "name", "surname", "address", "gender"})
+@Relation(
+        collectionRelation = "people",
+        itemRelation = "person")
 public class PersonDTO extends RepresentationModel<PersonDTO> implements Serializable {
 
     private static final long serialVersionUID = 1L;

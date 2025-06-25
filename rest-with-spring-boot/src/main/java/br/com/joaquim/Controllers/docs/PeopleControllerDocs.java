@@ -6,6 +6,8 @@ import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.PagedModel;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -50,7 +52,11 @@ public interface PeopleControllerDocs {
                     @ApiResponse(description = "Internal Server Error", responseCode = "500", content = @Content),
 
             })
-    List<PersonDTO> FindAll();
+    ResponseEntity<PagedModel<EntityModel<PersonDTO>>> FindAll(
+            @RequestParam(value = "page", defaultValue = "0") Integer page,
+            @RequestParam(value = "size", defaultValue = "10") Integer size,
+            @RequestParam(value = "direction", defaultValue = "asc") String direction
+    );
 
 
     @Operation(summary = "Adds a new person", description = "adds a new person", tags = {"People"},

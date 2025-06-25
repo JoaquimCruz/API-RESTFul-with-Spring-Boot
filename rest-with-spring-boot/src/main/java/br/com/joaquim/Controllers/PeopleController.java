@@ -6,6 +6,11 @@ import br.com.joaquim.Services.PersonServices;
 import br.com.joaquim.data.dto.v1.PersonDTO;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.PagedModel;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -32,10 +37,28 @@ public class PeopleController implements PeopleControllerDocs {
 
     @GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_YAML_VALUE})
     @Override
-    public List<PersonDTO> FindAll(){
-        return service.FindAll();
+    public ResponseEntity<PagedModel<EntityModel<PersonDTO>>> FindAll(
+            @RequestParam(value = "page", defaultValue = "0") Integer page,
+            @RequestParam(value = "size", defaultValue = "10") Integer size,
+            @RequestParam(value = "direction", defaultValue = "asc") String direction
+    ){
+        var sortDirection = "Desc" .equalsIgnoreCase(direction) ? Sort.Direction.DESC : Sort.Direction.ASC;
+        Pageable pegeable = PageRequest.of(page, size, Sort.by(sortDirection, "name"));
+        return  ResponseEntity.ok(service.FindAll(pegeable));
     }
 
+    @GetMapping(value = "/findPersonByName{name}",
+            produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_YAML_VALUE})
+    public ResponseEntity<PagedModel<EntityModel<PersonDTO>>> FindByName(
+            @RequestParam(value = "name", defaultValue = "") String name,
+            @RequestParam(value = "page", defaultValue = "0") Integer page,
+            @RequestParam(value = "size", defaultValue = "10") Integer size,
+            @RequestParam(value = "direction", defaultValue = "asc") String direction
+    ){
+        var sortDirection = "Desc" .equalsIgnoreCase(direction) ? Sort.Direction.DESC : Sort.Direction.ASC;
+        Pageable pegeable = PageRequest.of(page, size, Sort.by(sortDirection, "name"));
+        return  ResponseEntity.ok(service.FindByName(name,pegeable));
+    }
 
 
     // Colocou para aceitar o Yaml
